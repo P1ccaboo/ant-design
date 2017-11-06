@@ -3,16 +3,23 @@ sudo: false
 language: node_js
 
 node_js:
-  - "8.5"
+  - 8
 
 env:
+  - TEST_TYPE=lint
+  - TEST_TYPE=test:dist
+  - TEST_TYPE=test:lib
+  - TEST_TYPE=test:es
+  - TEST_TYPE=test:dom
+  - TEST_TYPE=test:node
   matrix:
-    - TEST_TYPE=lint
-    - TEST_TYPE=test:dist
-    - TEST_TYPE=test:lib
-    - TEST_TYPE=test:es
-    - TEST_TYPE=test:dom
-    - TEST_TYPE=test:node
+    - REACT=15
+    - REACT=16
+
+matrix:
+  fast_finish: true
+  exclude:
+    - env: REACT=15 TEST_TYPE=lint
 
 before_script:
   - export TZ=China/Beijing
